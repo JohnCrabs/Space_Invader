@@ -62,15 +62,18 @@ class SpaceInvaders:
         icon = pygame.image.load("sprites/spaceship.png")
         pygame.display.set_icon(icon)
 
-        # Set font
+        # Set score
         self.score_value = 0
+
+        # Set Clock
+        self.clock = pygame.time.Clock()
 
         # Set player
         sprite = pygame.image.load("sprites/playership.png")
         p_w, p_h = sprite.get_rect().size
         self.player = Character()
         self.player.set("spaceship", sprite, p_w, p_h, SCREEN_WIDTH / 2 - p_w / 2,
-                        SCREEN_HEIGHT - p_h - p_h / 2, speed_X=3)
+                        SCREEN_HEIGHT - p_h - p_h / 2, speed_X=6)
 
         # Set bullet
         # sprite = pygame.image.load("sprites/rocket.png")
@@ -78,7 +81,7 @@ class SpaceInvaders:
         p_w, p_h = sprite.get_rect().size
         self.rocket = Character()
         self.rocket.set("rocket", sprite, p_w, p_h, SCREEN_WIDTH / 2 - p_w / 2,
-                        SCREEN_HEIGHT - p_h - p_h / 2, speed_Y=-6)
+                        SCREEN_HEIGHT - p_h - p_h / 2, speed_Y=-10)
 
         # Set enemy
         self.enemy = []
@@ -201,7 +204,7 @@ class SpaceInvaders:
                                           self.rocket.sprite_w / 2
                     self.rocket.coord_Y = self.player.coord_Y + self.player.sprite_h / rockdiv
                     self.enemy[i].set_random_coordinated(SCREEN_MARGIN,
-                                                         SCREEN_WIDTH - SCREEN_MARGIN - self.enemy[i].sprite_w,
+                                                         SCREEN_WIDTH - SCREEN_MARGIN - self.enemy[i].sprite_w - 1,
                                                          50, 150)
                     self.score_value += self.enemy_fleet
                     self.enemy_fleet += 1
@@ -216,3 +219,4 @@ class SpaceInvaders:
             self.set_text_info()
 
             pygame.display.update()
+            self.clock.tick(120)
